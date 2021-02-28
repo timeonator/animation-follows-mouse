@@ -108,7 +108,7 @@ function ob(x, y, r, cc, o, s) {
   this.t = Math.random() * 150;
 
   this.o = o;
-  this.dr = function () {
+  this.draw = function () {
     const ls = {
       x: this.x,
       y: this.y
@@ -130,7 +130,7 @@ function anim() {
   ctx.fillStyle = "rgba(0,0,0,0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   a.forEach(function (e, i) {
-    e.dr();
+    e.draw();
   });
 }
 </script>
