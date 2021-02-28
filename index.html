@@ -27,7 +27,7 @@
 		<script>
 			var canvas;
 //= document.getElementById('cw');
-var c;
+var ctx; // context
 var u = 10;
 const m = {
   x: innerWidth / 2,
@@ -37,22 +37,24 @@ window.onmousemove = function (e) {
   m.x = e.clientX;
   m.y = e.clientY;
 };
-function gc() {
+
+function getRandomColor() {
   var s = "0123456789ABCDEF";
-  var c = "#";
+  var color = "#";
   for (var i = 0; i < 6; i++) {
-    c += s[Math.ceil(Math.random() * 15)];
+    color += s[Math.ceil(Math.random() * 15)];
   }
-  return c;
+  return color;
+  // return 'red';
 }
 
 
 var a = [];
 window.onload = function myfunction() {
   canvas = document.getElementById("cw");
-  c = canvas.getContext("2d");
+  ctx = canvas.getContext("2d");
 
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 12; i++) {
     var r = 30;
     var x = Math.random() * (innerWidth - 2 * r) + r;
     var y = Math.random() * (innerHeight - 2 * r) + r;
@@ -68,8 +70,8 @@ window.onload = function myfunction() {
   }
   //cn.style.backgroundColor = "#700bc8";
 
-  c.lineWidth = "2";
-  c.globalAlpha = 0.5;
+  ctx.lineWidth = "100";
+  ctx.globalAlpha = 0.4;
   resize();
   anim();
 };
@@ -80,15 +82,15 @@ function resize() {
   canvas.height = innerHeight;
   canvas.width = innerWidth;
   for (var i = 0; i < 101; i++) {
-    var r = 30;
+    var r = 150;
     var x = Math.random() * (innerWidth - 2 * r) + r;
     var y = Math.random() * (innerHeight - 2 * r) + r;
     a[i] = new ob(
       innerWidth / 2,
       innerHeight / 2,
       4,
-      gc(),
-      Math.random() * 200 + 20,
+      getRandomColor(),
+      Math.random() * 200 + 50,
       0.02
     );
   }
@@ -114,19 +116,19 @@ function ob(x, y, r, cc, o, s) {
     this.theta += this.s;
     this.x = m.x + Math.cos(this.theta) * this.t;
     this.y = m.y + Math.sin(this.theta) * this.t;
-    c.beginPath();
-    c.lineWidth = this.r;
-    c.strokeStyle = this.cc;
-    c.moveTo(ls.x, ls.y);
-    c.lineTo(this.x, this.y);
-    c.stroke();
-    c.closePath();
+    ctx.beginPath();
+    ctx.lineWidth = this.r;
+    ctx.strokeStyle = this.cc;
+    ctx.moveTo(ls.x, ls.y);
+    ctx.lineTo(this.x, this.y);
+    ctx.stroke();
+    ctx.closePath();
   };
 }
 function anim() {
   requestAnimationFrame(anim);
-  c.fillStyle = "rgba(0,0,0,0.05)";
-  c.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   a.forEach(function (e, i) {
     e.dr();
   });
