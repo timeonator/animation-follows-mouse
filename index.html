@@ -50,11 +50,11 @@ function getRandomColor() {
 
 
 var a = [];
-window.onload = function myfunction() {
+window.onload = () => {
   canvas = document.getElementById("cw");
   ctx = canvas.getContext("2d");
 
-  for (var i = 0; i < 104; i++) {
+  for (var i = 0; i < 112; i++) {
     var r = 30;
     var x = Math.random() * (innerWidth - 2 * r) + r;
     var y = Math.random() * (innerHeight - 2 * r) + r;
@@ -67,11 +67,12 @@ window.onload = function myfunction() {
       2
     );
     a.push(t);
+ 
   }
   //cn.style.backgroundColor = "#700bc8";
 
-  ctx.lineWidth = "100";
-  ctx.globalAlpha = 0.4;
+  ctx.lineWidth = 100;
+  ctx.globalAlpha = 0.1;
   resize();
   anim();
 };
@@ -81,7 +82,7 @@ window.onresize = function () {
 function resize() {
   canvas.height = innerHeight;
   canvas.width = innerWidth;
-  for (var i = 0; i < 101; i++) {
+  for (var i = 0; i < 110; i++) {
     var r = 150;
     var x = Math.random() * (innerWidth - 2 * r) + r;
     var y = Math.random() * (innerHeight - 2 * r) + r;
@@ -127,7 +128,7 @@ function ob(x, y, r, cc, o, s) {
 }
 function anim() {
   requestAnimationFrame(anim);
-  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillStyle = "rgba(0,0,0,.08)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   a.forEach(function (e, i) {
     e.draw();
